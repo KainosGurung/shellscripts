@@ -1,0 +1,15 @@
+#! /bin/bash
+
+
+for ((i=1; i <= 3; ++i)) 
+do
+	mkdir "dir$i"
+	cd "dir$i"
+
+	for ((j=1; j <= 30; ++j))
+	do
+		touch "file$j"
+		echo  "d$i f$j" >> "file$j"
+	done
+	cd ..
+done

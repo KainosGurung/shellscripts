@@ -1,0 +1,41 @@
+#! /bin/bash
+
+#dirs contains the name of all sub directories in this directory
+dirs=$(ls -d */)
+
+#check to see if a command line arguement was supplied
+if [ $# -eq 1 ]; then 
+	new_dir=$1 #if it was, set the new directory name to it
+else
+	new_dir="merged" #otherwise default the name to merged
+fi
+
+typeset -i counter=1
+current_directory=$(pwd) #get current working directory
+touch log.txt #create log file
+
+#redirect stdout and stderr to log.txt and append
+mkdir $new_dir >> "$current_directory/log.txt" 2>&1;
+
+#loop through the sub directories
+for i in $dirs
+do
+	cd "$current_directory/$i"
+
+	#files contains sorted list of files ending in a number
+	files=$(find . -iname '*[0-9]' | sort -V)
+
+	#loop through those files
+	for j in $files
+	do
+		#renumber files according to the counter
+		mv $j "file$counter" >> "$current_directory/log.txt" 2>&1; 
+
+		#move the file to the new directory
+		mv "file$counter" "$current_directory/$new_dir" >> "$current_directory/log.txt" 2>&1;
+		counter=counter+1;
+	done
+done
+counter=counter-1;
+echo "$counter files moved to $new_dir"
+echo "Please see logfile for more info"

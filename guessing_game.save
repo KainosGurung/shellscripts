@@ -1,0 +1,23 @@
+#! /bin/bash
+
+num=$RANDOM
+guess=0
+
+echo "type \"exit\" to quit"
+echo "Hello $USER"
+echo "Can you guess what my number is?"
+
+while [ true ];
+do
+	read guess;
+	if [ guess = "exit" ]; then
+		echo "Goodbye\n\n"
+		break;
+	else if [ guess > num ]; then
+		echo "Too High!"
+	else if [ guess < num ]; then
+		echo "Too Low!"
+	else
+		echo "You chose wisely young padwan"
+	fi
+done;
