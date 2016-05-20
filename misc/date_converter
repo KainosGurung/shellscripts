@@ -1,0 +1,12 @@
+#! /bin/bash
+
+date=$(date +"%m-%d-%Y")
+time=$(date +"%T")
+
+echo "Current daytime: $date $time\n"
+
+if [ $# == 2 ]; then
+
+		
+
+fi
