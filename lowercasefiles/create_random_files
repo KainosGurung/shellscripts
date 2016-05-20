@@ -1,0 +1,22 @@
+#! /bin/bash
+#This program randomly generates upto 100 'randomly' named files
+
+rm -rf temp
+mkdir temp
+cd temp
+
+max=`expr $RANDOM % 100 + 1`
+
+
+charSet="[:alnum:]"
+
+for ((i=0; i < $max; ++i))
+do
+	
+	ran1=`expr $RANDOM % 10 + 1`
+	ran2=`expr $RANDOM % 10 + 1`
+
+	#Generate a random alphanumeric string
+	filename=$(cat /dev/urandom | tr -cd "$charSet" | head -c $ran1)-$(cat /dev/urandom | tr -cd "$charSet" | head -c $ran2).txt
+	touch $filename
+done

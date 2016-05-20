@@ -1,0 +1,10 @@
+#! /bin/bash
+
+#this script gives execute permissions to all files in this directory
+
+files=$(find)
+
+for file in $files
+do
+	chmod +x $file
+done

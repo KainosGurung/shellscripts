@@ -1,0 +1,154 @@
+#! /bin/bash
+
+main() {
+
+touch log.txt
+
+echo "Hello $USER, Enter a command to get started"
+echo
+echo "0) cmd   - to display the list of commands"
+echo "1) pwd   - get current working directory "
+echo "2) ls    - get contents of current direcory"
+echo "3) mkdir - make a new directory"
+echo "4) cd    - change current directory"
+echo "5) touch - create new file"
+echo "6) cp - copy a file or directory"
+echo "7) rm - delete a file or directory"
+#echo "8) "
+#echo "9) "
+#echo "10) "
+echo
+
+while [ true ]
+do
+	read input
+
+	#split the input string based on the 'space' character
+	#and store it into an array called parsed_input	
+	IFS=' ' read -r -a parsed_input <<< "$input"
+
+	input=${parsed_input[0]}
+
+	if [ $input = "cmd" ]
+	then
+		echo
+		echo "0) cmd   - to display the list of commands"
+		echo "1) pwd   - get current working directory "
+		echo "2) ls    - get contents of current direcory"
+		echo "3) mkdir - make a new directory"
+		echo "4) cd    - change current directory"
+		echo "5) touch - create new file"
+		echo "6) cp - copy a file or directory"
+		echo "7) rm - delete a file or directory"
+		#echo "8) "
+		#echo "9) "
+		#echo "10) "
+		echo
+
+	elif [ $input = "quit" ]
+	then
+		echo "GoodBye!"
+		break
+	elif [ $input = "pwd" ]
+	then
+		echo "Your current working directory is: "
+		pwd
+	elif [ $input = "ls" ]
+	then
+		myls
+	elif [ $input = "mkdir" ]
+	then
+		mymkdir
+
+	elif [ $input = "cd" ]
+	then
+		mycd
+	elif [ $input = "touch" ]
+	then
+		mytouch
+	elif [ $input = "cp" ]
+	then
+		mycp
+	elif [ $input = "rm" ]
+	then
+		myrm
+	else
+		echo "Command not recognized"
+	fi
+
+done
+
+rm -rf log.txt
+}
+
+myls(){
+	echo "Here are the contents of your current directory: "
+	ls
+}
+
+mymkdir(){
+	echo "Please enter the name of the new directory: "
+	read name
+	mkdir $name 2> log.txt
+
+	if [ -s "log.txt" ]
+	then
+		cat log.txt
+	else
+		echo "Directory $name created!"
+	fi
+}
+
+mycd(){
+	echo "Please enter the path: "
+	read path
+	cd $path 2> log.txt
+
+	if [ -s "log.txt" ]
+	then
+		cat log.txt
+	fi
+}
+
+mytouch() {
+	echo "Please enter the name of the file you want to touch"
+	read name
+	touch $name 2> log.txt
+
+	if [ -s "log.txt" ]
+	then
+		cat log.txt
+	else
+		echo "File $name has been touched!"
+	fi
+}
+
+
+mycp() {
+	echo "Please enter the names of the files you want to copy"
+	read name
+	cp $name 2> log.txt
+
+	if [ -s "log.txt" ]
+	then
+		cat log.txt
+	else
+		echo "It has been copied"
+	fi
+}
+
+
+myrm() {
+	echo "Please enter the name of the file(s) you want to delete"
+	read name
+	rm $name 2> log.txt
+
+	if [ -s "log.txt" ]
+	then
+		cat log.txt
+	else
+		echo "It has been deleted"
+	fi
+}
+
+main #execute the script

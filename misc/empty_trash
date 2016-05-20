@@ -1,0 +1,13 @@
+#! /bin/bash
+
+#This program navigates to the Trash directory and deletes all
+#file and sub directories inside
+
+cd ~/.local/share/Trash
+
+files=$(find)
+
+for file in $files
+do
+	rm -rf $file 2> log.txt
+done
