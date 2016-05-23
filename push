@@ -3,4 +3,4 @@
 git init
 git add .
 git commit -m "$1"
-git push < credentials.txt
+git push
