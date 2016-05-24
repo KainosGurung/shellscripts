@@ -1,0 +1,15 @@
+./cmd_args
+./for_loop
+./sorted_file_list.txt
+./empty_trash
+./file_list.txt
+./guessing_game
+./_cd
+./delete_files
+./create_files
+./endless_loop
+./shift_args
+./c_d
+./find_largest_directory
+./date_converter
+./if_stmnt

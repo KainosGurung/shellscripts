@@ -1,0 +1,2 @@
+out.txt:./_cd
+../misc/out.txt:./_cd
